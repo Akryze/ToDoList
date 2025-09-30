@@ -26,14 +26,14 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    public void setCompleted(Long id, boolean completed) {
+    public Task setCompleted(Long id, boolean completed) {
         Optional<Task> taskList = taskRepository.findById(id);
         if (taskList.isPresent()) {
             Task task = taskList.get();
             task.setCompleted(completed);
-            taskRepository.save(task);
+            return taskRepository.save(task);
         }
-
+            return null;
     }
 
 

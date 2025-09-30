@@ -27,7 +27,11 @@ public class TaskController {
 
     }
 
+    @PutMapping("/{id}")
+    public Task setCompleted (@PathVariable Long id, @RequestBody boolean completed) {
+        return taskService.setCompleted(id, completed);
 
+    }
 
 
 }
