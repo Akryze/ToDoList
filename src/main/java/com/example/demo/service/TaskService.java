@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.exception.TaskNotFoundException;
 import com.example.demo.model.Task;
 import com.example.demo.repository.TaskRepository;
 import org.springframework.stereotype.Service;
@@ -28,20 +29,24 @@ public class TaskService {
 
     public Task setCompleted(Long id, boolean completed) {
         Optional<Task> taskList = taskRepository.findById(id);
+
         if (taskList.isPresent()) {
             Task task = taskList.get();
             task.setCompleted(completed);
             return taskRepository.save(task);
         }
-            return null;
+        return null;
     }
 
-    public void deleteTask (Long id) {
+    public void deleteTask(Long id) {
         Optional<Task> taskList = taskRepository.findById(id);
-        if(taskList.isPresent()) {
+
+        if (taskList.isPresent()) {
             Task task = taskList.get();
-             taskRepository.delete(task);
-        }
+            taskRepository.delete(task);
+        } else
+            throw new TaskNotFoundException("Task Not Found");
+
     }
 
 
