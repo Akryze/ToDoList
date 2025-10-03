@@ -27,6 +27,7 @@ public class TaskController {
 
     }
 
+    //body json request "true" or "false"
     @PutMapping("/{id}")
     public Task setCompleted (@PathVariable Long id, @RequestBody boolean completed) {
         return taskService.setCompleted(id, completed);

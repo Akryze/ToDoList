@@ -34,8 +34,9 @@ public class TaskService {
             Task task = taskList.get();
             task.setCompleted(completed);
             return taskRepository.save(task);
-        }
-        return null;
+        } else
+            throw new TaskNotFoundException("Task Not Found");
+
     }
 
     public void deleteTask(Long id) {
